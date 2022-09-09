@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\ORM\Query;
+
 /**
  * Alunos Controller
  *
@@ -33,7 +35,9 @@ class AlunosController extends AppController
     public function view($id = null)
     {
         $aluno = $this->Alunos->get($id, [
-            'contain' => ['Cursos']
+            'contain' => ['Cursos' => function (Query $q){
+                return $q->distinct('Cursos.disciplina');
+            }]
         ]);
 
         $this->set(compact('aluno'));

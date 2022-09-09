@@ -11,6 +11,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>Matrícula</th>
                     <th><?= $this->Paginator->sort('aluno_id') ?></th>
                     <th><?= $this->Paginator->sort('curso_id') ?></th>
                     <th class="actions"><?= __('Ações') ?></th>
@@ -19,6 +20,7 @@
             <tbody>
                 <?php foreach ($matriculas as $matricula): ?>
                 <tr>
+                    <td><?= $matricula->id ?></td>
                     <td><?= $matricula->aluno->nome ?></td>
                     <td><?= $matricula->curso->disciplina ?></td>
                     <td class="actions">
