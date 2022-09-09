@@ -7,13 +7,13 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
+            <h4 class="heading"><?= __('Ações') ?></h4>
             <?= $this->Form->postLink(
-                __('Delete'),
+                __('Deletar'),
                 ['action' => 'delete', $curso->id],
                 ['confirm' => __('Are you sure you want to delete # {0}?', $curso->id), 'class' => 'side-nav-item']
             ) ?>
-            <?= $this->Html->link(__('List Cursos'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('Listar Cursos'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">
@@ -22,10 +22,8 @@
             <fieldset>
                 <legend><?= __('Edit Curso') ?></legend>
                 <?php
-                    echo $this->Form->control('id_alunos');
-                    echo $this->Form->control('id_professores');
-                    echo $this->Form->control('nome');
-                    echo $this->Form->control('cargaHoraria');
+                    echo $this->Form->control('disciplina');
+                    echo $this->Form->control('carga_horaria');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

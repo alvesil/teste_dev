@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -58,16 +57,6 @@ class CursosController extends AppController
             $this->Flash->error(__('The curso could not be saved. Please, try again.'));
         }
         $this->set(compact('curso'));
-
-        //recupera todos os alunos
-        $alunos = $this->loadModel('Alunos');
-        $alunos = $this->Alunos->find()->all();
-        $this->set('Alunos', $alunos);
-
-        //recupera todos os professores
-        $professores = $this->loadModel('Professores');
-        $professores = $this->Professores->find()->all();
-        $this->set('Professores', $professores);
     }
 
     /**
@@ -112,12 +101,5 @@ class CursosController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
-    }
-
-    public function getAlunos()
-    {
-        $alunos = $this->loadModel('Alunos');
-        $alunos = $this->Alunos->find()->all();
-        $this->set('Alunos', $alunos);
     }
 }

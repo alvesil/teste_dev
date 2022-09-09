@@ -6,16 +6,18 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Curso Entity
+ * Matricula Entity
  *
  * @property int $id
- * @property int|null $alunos_id
- * @property string $disciplina
- * @property int $carga_horaria
+ * @property int $aluno_id
+ * @property int $curso_id
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
+ *
+ * @property \App\Model\Entity\Aluno $aluno
+ * @property \App\Model\Entity\Curso $curso
  */
-class Curso extends Entity
+class Matricula extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -27,10 +29,11 @@ class Curso extends Entity
      * @var array<string, bool>
      */
     protected $_accessible = [
-        'alunos_id' => true,
-        'disciplina' => true,
-        'carga_horaria' => true,
+        'aluno_id' => true,
+        'curso_id' => true,
         'created' => true,
         'modified' => true,
+        'aluno' => true,
+        'curso' => true,
     ];
 }

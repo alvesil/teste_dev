@@ -33,7 +33,7 @@ class AlunosController extends AppController
     public function view($id = null)
     {
         $aluno = $this->Alunos->get($id, [
-            'contain' => [],
+            'contain' => ['Cursos']
         ]);
 
         $this->set(compact('aluno'));

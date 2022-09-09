@@ -40,10 +40,16 @@ class CursosTable extends Table
         parent::initialize($config);
 
         $this->setTable('cursos');
-        $this->setDisplayField('id');
+        $this->setDisplayField('disciplina');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+
+        $this->belongsToMany('Alunos', [
+            'foreignKey' => 'curso_id',
+            'targetForeginKey' => 'aluno_id',
+            'joinTable' => 'matriculas'
+        ]);
     }
 
     /**
@@ -55,26 +61,34 @@ class CursosTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->integer('id_alunos')
-            ->requirePresence('id_alunos', 'create')
-            ->notEmptyString('id_alunos');
+            ->integer('alunos_id')
+            ->allowEmptyString('alunos_id');
 
         $validator
-            ->integer('id_professores')
-            ->requirePresence('id_professores', 'create')
-            ->notEmptyString('id_professores');
+            ->scalar('disciplina')
+            ->maxLength('disciplina', 100)
+            ->requirePresence('disciplina', 'create')
+            ->notEmptyString('disciplina');
 
         $validator
-            ->scalar('nome')
-            ->maxLength('nome', 255)
-            ->requirePresence('nome', 'create')
-            ->notEmptyString('nome');
-
-        $validator
-            ->integer('cargaHoraria')
-            ->requirePresence('cargaHoraria', 'create')
-            ->notEmptyString('cargaHoraria');
+            ->integer('carga_horaria')
+            ->requirePresence('carga_horaria', 'create')
+            ->notEmptyString('carga_horaria');
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules): RulesChecker
+    {
+        $rules->add($rules->existsIn('alunos_id', 'Alunos'), ['errorField' => 'alunos_id']);
+
+        return $rules;
     }
 }
