@@ -34,6 +34,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+    <style>
+        .btn-logout:hover{
+            background-color: #d33c43;
+            padding: 8px 25px 8px 25px;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <nav class="top-nav">
@@ -41,8 +48,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <a href="<?= $this->Url->build('/') ?>"><span>Cake</span>PHP</a>
         </div>
         <div class="top-nav-links">
-            <a target="_blank" rel="noopener" href="https://book.cakephp.org/4/">Documentation</a>
-            <a target="_blank" rel="noopener" href="https://api.cakephp.org/">API</a>
+            <!-- <a target="_blank" rel="noopener" href="https://book.cakephp.org/4/">Documentation</a>
+            <a target="_blank" rel="noopener" href="https://api.cakephp.org/">API</a> -->
+            <?php 
+                if ($username) {
+                    echo $this->Html->link('Sair',['controller' => 'Users', 'action' => 'logout'], ['class' => 'btn-logout']);
+                }
+            ?>
         </div>
     </nav>
     <main class="main">

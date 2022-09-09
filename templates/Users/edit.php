@@ -8,7 +8,7 @@
 ?>
 <style>
     .error-message {
-        color: red;
+        color: #d33c43;
     }
 </style>
 <div class="row">

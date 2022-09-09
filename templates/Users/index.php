@@ -4,8 +4,16 @@
  * @var \App\Model\Entity\User[]|\Cake\Collection\CollectionInterface $users
  */
 ?>
+<style>
+    .m-2{
+        margin-left: 5px;
+    }
+</style>
 <div class="users index content">
-    <?= $this->Html->link(__('New User'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    <?= $this->Html->link(__('Novo Usuário'), ['action' => 'add'], ['class' => 'button float-right m-2']) ?>
+    <?= $this->Html->link(__('Novo Tipo de Usuário'), ['controller' => 'Roles','action' => 'add'], ['class' => 'button float-right m-2']) ?>
+    <?= $this->Html->link(__('Novo Aluno'), ['controller' => 'Alunos', 'action' => 'add'], ['class' => 'button float-right m-2']) ?>
+    <?= $this->Html->link(__('Novo Curso'), ['controller' => 'Cursos', 'action' => 'add'], ['class' => 'button float-right m-2']) ?>
     <h3><?= __('Users') ?></h3>
     <div class="table-responsive">
         <table>
