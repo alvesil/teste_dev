@@ -1,9 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
 
 use Cake\ORM\Query;
+
+use function PHPSTORM_META\type;
 
 /**
  * Alunos Controller
@@ -35,7 +38,7 @@ class AlunosController extends AppController
     public function view($id = null)
     {
         $aluno = $this->Alunos->get($id, [
-            'contain' => ['Cursos' => function (Query $q){
+            'contain' => ['Cursos' => function (Query $q) {
                 return $q->distinct('Cursos.disciplina');
             }]
         ]);
@@ -107,4 +110,14 @@ class AlunosController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+    public function getAlunos()
+    {
+        $this->disableAutoRender();
+        $p = $this->request->getData('p');
+        $alunos = $this->Alunos->find('all', [
+            'conditions' => ['nome LIKE' => '%' . $p . '%']
+        ]);
+        // dd($alunos);
+        return die(json_encode($alunos, JSON_UNESCAPED_UNICODE));
+    }
 }

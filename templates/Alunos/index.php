@@ -1,15 +1,32 @@
 <?php
 
+use Cake\Routing\Router;
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Aluno[]|\Cake\Collection\CollectionInterface $alunos
  */
 ?>
+<style>
+    .pesquisa {
+        width: 50%;
+    }
+
+    .inline {
+        display: inline;
+    }
+</style>
 <div class="alunos index content">
     <?= $this->Html->link(__('Novo Aluno'), ['action' => 'add'], ['class' => 'button float-right', 'style' => 'margin-left: 5px;']) ?>
     <?= $this->Html->link(__('Matriculas'), ['controller' => 'Matriculas', 'action' => 'index'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Alunos') ?></h3>
-    <div class="table-responsive">
+    <h3 class="pesquisa"><?= __('Alunos') ?></h3>
+    <?= $this->Form->create() ?>
+
+    <?= $this->Form->end() ?> <div class="table-responsive">
+        <div class="pesquisa">
+            <input id="pesquisa" type="text" class="form-control inline" placeholder="Pesquisar">
+            <button id="btn-pesquisa" class="inline">Pesquisar</button>
+        </div>
         <table>
             <thead>
                 <tr>
@@ -46,3 +63,40 @@
         <p><?= $this->Paginator->counter(__('Página {{page}} de {{pages}}, mostrando {{current}} registro(s) de {{count}}')) ?></p>
     </div>
 </div>
+<?= $this->Html->script('jquery.js'); ?>
+<script>
+    $(document).ready(function() {
+        $('#btn-pesquisa').on('click', function() {
+            // console.log($(this).val());
+            var uri = '<?= $this->Url->build(['controller' => 'Alunos', 'action' => 'getAlunos']) ?>';
+            var pesquisa = $('#pesquisa').val();
+            var csrfToken = $('[name="_csrfToken"]').val();
+            $.ajax({
+                headers: {
+                    'X-CSRF-Token': csrfToken
+                },
+                method: "POST",
+                url: uri,
+                data: {
+                    p: pesquisa
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $('.paginator').hide();
+                    result.forEach(element => {
+                        $('tbody').html(
+                            '<tr>'+
+                            '<td>'+element.nome+'</td>'+
+                            '<td>'+element.idade+'</td>'+
+                            '<td>'+element.sexo+'</td>'+
+                            '<td class="actions">'+
+                            '<a href="alunos/view/'+element.id+'">Detalhes</a>'+
+                            '</td>'+
+                            '</tr>'
+                        );
+                    });
+                }
+            });
+        });
+    });
+</script>
