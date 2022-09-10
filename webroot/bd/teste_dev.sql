@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 09-Set-2022 às 07:19
+-- Tempo de geração: 10-Set-2022 às 18:04
 -- Versão do servidor: 5.7.36
 -- versão do PHP: 8.0.13
 
@@ -33,18 +33,20 @@ CREATE TABLE IF NOT EXISTS `alunos` (
   `nome` varchar(255) NOT NULL,
   `idade` int(3) NOT NULL,
   `sexo` varchar(1) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `alunos`
 --
 
-INSERT INTO `alunos` (`id`, `nome`, `idade`, `sexo`, `created`, `modified`) VALUES
-(1, 'Eduardo', 28, 'M', '2022-09-09 03:51:31', '2022-09-09 03:51:31'),
-(2, 'Lucas', 14, 'M', '2022-09-09 04:12:20', '2022-09-09 04:12:20');
+INSERT INTO `alunos` (`id`, `nome`, `idade`, `sexo`, `email`, `created`, `modified`) VALUES
+(1, 'Eduardo', 28, 'M', 'teste@teste.com.br', '2022-09-09 03:51:31', '2022-09-09 03:51:31'),
+(2, 'Lucas', 14, 'M', 'eduo@gmail.com', '2022-09-09 04:12:20', '2022-09-10 16:50:38'),
+(3, 'Clara', 21, 'F', 'carla@teste.comm', '2022-09-10 16:49:51', '2022-09-10 16:50:22');
 
 -- --------------------------------------------------------
 
@@ -85,17 +87,18 @@ CREATE TABLE IF NOT EXISTS `matriculas` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `matriculas`
 --
 
 INSERT INTO `matriculas` (`id`, `aluno_id`, `curso_id`, `created`, `modified`) VALUES
-(1, 1, 1, '2022-09-09 04:31:34', '2022-09-09 04:31:34'),
+(1, 1, 1, '2022-09-09 04:31:34', '2022-09-09 14:44:24'),
 (2, 1, 1, '2022-09-09 06:05:25', '2022-09-09 06:05:25'),
 (3, 1, 2, '2022-09-09 06:15:22', '2022-09-09 06:15:22'),
-(4, 2, 2, '2022-09-09 06:25:51', '2022-09-09 06:25:51');
+(4, 2, 2, '2022-09-09 06:25:51', '2022-09-09 06:25:51'),
+(5, 2, 2, '2022-09-09 14:45:41', '2022-09-09 14:45:41');
 
 -- --------------------------------------------------------
 
