@@ -115,7 +115,7 @@ class AlunosController extends AppController
         $this->disableAutoRender();
         $p = $this->request->getData('p');
         $alunos = $this->Alunos->find('all', [
-            'conditions' => ['nome LIKE' => '%' . $p . '%']
+            'conditions' => ['OR' => ['nome LIKE' => '%' . $p . '%', 'email LIKE' => '%' . $p . '%']]
         ]);
         // dd($alunos);
         return die(json_encode($alunos, JSON_UNESCAPED_UNICODE));

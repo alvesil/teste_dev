@@ -25,6 +25,7 @@
                     echo $this->Form->control('nome');
                     echo $this->Form->control('idade');
                     echo $this->Form->control('sexo');
+                    echo $this->Form->control('email');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Gravar')) ?>

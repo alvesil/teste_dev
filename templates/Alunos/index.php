@@ -33,6 +33,7 @@ use Cake\Routing\Router;
                     <th><?= $this->Paginator->sort('nome') ?></th>
                     <th><?= $this->Paginator->sort('idade') ?></th>
                     <th><?= $this->Paginator->sort('sexo') ?></th>
+                    <th><?= $this->Paginator->sort('email') ?></th>
                     <th class="actions"><?= __('Ações') ?></th>
                 </tr>
             </thead>
@@ -42,6 +43,7 @@ use Cake\Routing\Router;
                         <td><?= h($aluno->nome) ?></td>
                         <td><?= $this->Number->format($aluno->idade) ?></td>
                         <td><?= h($aluno->sexo) ?></td>
+                        <td><?= h($aluno->email) ?></td>
                         <td class="actions">
                             <?= $this->Html->link(__('Detalhes'), ['action' => 'view', $aluno->id]) ?>
                             <?= $this->Html->link(__('Editar'), ['action' => 'edit', $aluno->id]) ?>
@@ -82,19 +84,24 @@ use Cake\Routing\Router;
                 },
                 dataType: 'json',
                 success: function(result) {
-                    $('.paginator').hide();
-                    result.forEach(element => {
-                        $('tbody').html(
-                            '<tr>'+
-                            '<td>'+element.nome+'</td>'+
-                            '<td>'+element.idade+'</td>'+
-                            '<td>'+element.sexo+'</td>'+
-                            '<td class="actions">'+
-                            '<a href="alunos/view/'+element.id+'">Detalhes</a>'+
-                            '</td>'+
-                            '</tr>'
-                        );
-                    });
+                    if (result.length > 0) {
+                        $('.paginator').hide();
+                        result.forEach(element => {
+                            $('tbody').html(
+                                '<tr>' +
+                                '<td>' + element.nome + '</td>' +
+                                '<td>' + element.idade + '</td>' +
+                                '<td>' + element.sexo + '</td>' +
+                                '<td>' + element.email + '</td>' +
+                                '<td class="actions">' +
+                                '<a href="alunos/view/' + element.id + '">Detalhes</a>' +
+                                '</td>' +
+                                '</tr>'
+                            );
+                        });
+                    }else{
+                        alert("Nenhum registro encontrado para a pesquisa");
+                    }
                 }
             });
         });
