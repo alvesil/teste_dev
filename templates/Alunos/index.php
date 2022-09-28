@@ -86,6 +86,7 @@ use Cake\Routing\Router;
                 success: function(result) {
                     if (result.length > 0) {
                         $('.paginator').hide();
+                        console.log(result);
                         result.forEach(element => {
                             $('tbody').html(
                                 '<tr>' +

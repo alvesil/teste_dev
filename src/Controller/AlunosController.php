@@ -116,7 +116,11 @@ class AlunosController extends AppController
         $p = $this->request->getData('p');
         $alunos = $this->Alunos->find('all', [
             'conditions' => ['OR' => ['nome LIKE' => '%' . $p . '%', 'email LIKE' => '%' . $p . '%']]
-        ]);
+        ])->contain([
+            'Cursos' => function (Query $q) {
+                return $q->distinct('Cursos.disciplina');
+            }
+        ])->toArray();
         // dd($alunos);
         return die(json_encode($alunos, JSON_UNESCAPED_UNICODE));
     }
